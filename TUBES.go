@@ -6,78 +6,57 @@ func main() {
 	var nama, bulan, zodiak string
 	var tgl int
 
-	// ===== CEK NAMA =====
-	fmt.Print("Masukkan nama anda: ")
-	fmt.Scanln(&nama)
-
+	// CEK NAMA 
 	validNama := false
-	for validNama == false {
-		salah := false
-		for _, c := range nama {
-			if c >= '0' && c <= '9' {
-				salah = true
-			}
-		}
+	for !validNama {
+		fmt.Print("Masukkan nama anda: ")
+		fmt.Scanln(&nama)
 
-		if salah {
-			fmt.Print("Nama tidak boleh angka, masukkan lagi: ")
-			fmt.Scanln(&nama)
-		} else {
+		if nama != "" {
 			validNama = true
+		} else {
+			fmt.Println("Nama tidak boleh kosong!")
 		}
 	}
 
-	// ===== CEK BULAN =====
-	fmt.Print("Masukkan bulan lahir anda: ")
-	fmt.Scanln(&bulan)
-
+	// CEK BULAN 
 	validBulan := false
-	for validBulan == false {
-		adaAngka := false
-		for _, c := range bulan {
-			if c >= '0' && c <= '9' {
-				adaAngka = true
-			}
-		}
+	for !validBulan {
+		fmt.Print("Masukkan bulan lahir anda: ")
+		fmt.Scanln(&bulan)
 
-		bulanValid :=
-			bulan == "januari" || bulan == "februari" || bulan == "maret" ||
-				bulan == "april" || bulan == "mei" || bulan == "juni" ||
-				bulan == "juli" || bulan == "agustus" || bulan == "september" ||
-				bulan == "oktober" || bulan == "november" || bulan == "desember"
-
-		if adaAngka || !bulanValid {
-			fmt.Print("Bulan tidak valid, masukkan lagi: ")
-			fmt.Scanln(&bulan)
-		} else {
+		if bulan == "januari" || bulan == "februari" || bulan == "maret" ||
+			bulan == "april" || bulan == "mei" || bulan == "juni" ||
+			bulan == "juli" || bulan == "agustus" || bulan == "september" ||
+			bulan == "oktober" || bulan == "november" || bulan == "desember" {
 			validBulan = true
+		} else {
+			fmt.Println("Bulan tidak valid dan tidak boleh mengandung angka!")
 		}
 	}
 
 	// ===== CEK TANGGAL =====
-	fmt.Print("Masukkan tanggal lahir anda: ")
-	fmt.Scanln(&tgl)
-
 	validTanggal := false
-	for validTanggal == false {
-		if tgl <= 0 {
-			fmt.Print("Tanggal harus > 0, masukkan lagi: ")
-			fmt.Scanln(&tgl)
+	for !validTanggal {
+		fmt.Print("Masukkan tanggal lahir anda: ")
+		n, _ := fmt.Scanln(&tgl)
+
+		if n == 0 {
+			fmt.Println("Tanggal harus berupa angka!")
+			fmt.Scanln()
+		} else if tgl < 1 || tgl > 31 {
+			fmt.Println("Tanggal harus antara 1 sampai 31!")
 		} else if bulan == "februari" && tgl > 29 {
-			fmt.Print("Februari maksimal 29, masukkan lagi: ")
-			fmt.Scanln(&tgl)
-		} else if (bulan == "april" || bulan == "juni" || bulan == "september" || bulan == "november") && tgl > 30 {
-			fmt.Print("Bulan ini maksimal 30 hari, masukkan lagi: ")
-			fmt.Scanln(&tgl)
-		} else if tgl > 31 {
-			fmt.Print("Tanggal maksimal 31, masukkan lagi: ")
-			fmt.Scanln(&tgl)
+			fmt.Println("Februari maksimal 29 hari!")
+		} else if (bulan == "april" || bulan == "juni" ||
+			bulan == "september" || bulan == "november") && tgl > 30 {
+			fmt.Println("Bulan ini maksimal 30 hari!")
 		} else {
 			validTanggal = true
 		}
 	}
 
-	// ===== ZODIAK =====
+	// ZODIAK 
 	if (bulan == "maret" && tgl >= 21) || (bulan == "april" && tgl <= 19) {
 		zodiak = "Aries"
 	} else if (bulan == "april" && tgl >= 20) || (bulan == "mei" && tgl <= 20) {
@@ -104,7 +83,7 @@ func main() {
 		zodiak = "Pisces"
 	}
 
-	// ===== OUTPUT =====
+	//OUTPUT
 	fmt.Println("===============================")
 	fmt.Println("Nama    :", nama)
 	fmt.Println("Tanggal :", tgl, bulan)
