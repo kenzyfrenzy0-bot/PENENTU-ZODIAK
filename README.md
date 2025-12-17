@@ -1,3 +1,3 @@
 # PENENTU-ZODIAK
 
-Muhammad RIFQI & Ahmad Nizar Nasir
+Muhammad RIFQI & Ahmad Nasir Nizar
